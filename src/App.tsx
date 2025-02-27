@@ -5,6 +5,7 @@ import routes from "tempo-routes";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import MobileContactBar from "./components/MobileContactBar";
 import SocialSidebar from "./components/SocialSidebar";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
         </div>
         <Footer />
+        <MobileContactBar />
       </>
     </Suspense>
   );

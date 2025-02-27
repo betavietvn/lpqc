@@ -21,15 +21,33 @@ function SocialLink({ href, icon, alt }: SocialLinkProps) {
 
 export default function SocialSidebar() {
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
     const handleScroll = () => {
       setShowBackToTop(window.scrollY > 300);
     };
 
+    // Initial checks
+    checkMobile();
+    handleScroll();
+
+    // Add event listeners
+    window.addEventListener("resize", checkMobile);
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  if (isMobile) return null;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
